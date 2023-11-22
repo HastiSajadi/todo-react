@@ -1,12 +1,32 @@
+import { useEffect } from 'react';
 import { useState } from 'react'
 import {Header} from './components/header'
 import {Task} from './components/task'
 
+
+const localStorageKey = "todo:savedTasks";
+
 function App() {
   const [tasks, setTasks] = useState([]);
 
+  function loadSavedTasks(){
+    const saved = localStorage.getItem(localStorageKey);
+    if(saved){
+      setTasks(JSON.parse(saved));
+    }
+  }
+
+  useEffect(()=>{
+    loadSavedTasks();
+  },[])
+
+  function setTasksAndSave(newTask){
+    setTasks(newTask);
+    localStorage.setItem(localStorageKey, JSON.stringify(newTask));
+  }
+
   function addTask(taskTitle){
-    setTasks([
+    setTasksAndSave([
       ...tasks,
       {
         id: crypto.randomUUID(),
@@ -15,6 +35,8 @@ function App() {
       }
     ])
   }
+
+ 
 
   function toggleTaskCompletedById(taskId){
     const newTasks = tasks.map( task =>{
@@ -26,12 +48,12 @@ function App() {
       }
       return task;
     });
-    setTasks(newTasks);
+    setTasksAndSave(newTasks);
   }
 
   function deleteTaskById(taskId){
     const newTasks = tasks.filter(task => task.id !== taskId);
-    setTasks(newTasks);
+    setTasksAndSave(newTasks);
   }
 
   return (
