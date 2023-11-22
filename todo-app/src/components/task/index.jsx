@@ -1,7 +1,8 @@
 import { TaskList } from '../task-list'
 import styles from './task.module.css'
 
-export function Task(){
+export function Task({tasks}){
+    
     return(
         <section className={styles.task}>
             <header className={styles.header}>
@@ -16,7 +17,10 @@ export function Task(){
             </header>
 
             <div className={styles.list}>
-                <TaskList />
+                {tasks.map(task => (
+                    <TaskList key={task.id} task={task} />
+                )
+                )}
             </div>
         </section>
     )

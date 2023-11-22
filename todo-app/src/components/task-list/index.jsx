@@ -1,14 +1,14 @@
 import styles from './task-list.module.css'
 import {TbTrash} from 'react-icons/tb'
 
-export function TaskList(){
+export function TaskList({task}){
     return(
         <div className={styles.task}>
             <button className={styles.checkContainer}>
                 <div/>
             </button>
 
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum, dicta.</p>
+            <p>{task.title}</p>
             <button className={styles.deleteButton}>
                 <TbTrash size={20}/>
             </button>
