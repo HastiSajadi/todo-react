@@ -1,7 +1,7 @@
 import { TaskList } from '../task-list'
 import styles from './task.module.css'
 
-export function Task({tasks}){
+export function Task({tasks , onComplete}){
     const tasksQuantity = tasks.length;
     const completedTasks = tasks.filter(task => task.isCompleted).length;
     return(
@@ -19,7 +19,7 @@ export function Task({tasks}){
 
             <div className={styles.list}>
                 {tasks.map(task => (
-                    <TaskList key={task.id} task={task} />
+                    <TaskList key={task.id} task={task} onComplete={onComplete} />
                 )
                 )}
             </div>
