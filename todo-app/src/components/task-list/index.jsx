@@ -9,7 +9,7 @@ export function TaskList({task,onComplete}){
                 {task.isCompleted ? <BsFillCheckCircleFill/> : <div/>}
             </button>
 
-            <p>{task.title}</p>
+            <p className={task.isCompleted ? styles.textCompleted : ""}>{task.title}</p>
             <button className={styles.deleteButton}>
                 <TbTrash size={20}/>
             </button>
